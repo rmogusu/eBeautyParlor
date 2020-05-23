@@ -30,11 +30,7 @@ android {
         }
     }
 }
-testOptions {
-    unitTests {
-        includeAndroidResources = true
-    }
-}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'org.robolectric:robolectric:4.2'
