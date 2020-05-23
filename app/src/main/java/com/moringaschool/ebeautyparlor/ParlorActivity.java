@@ -20,17 +20,17 @@ public class ParlorActivity extends AppCompatActivity {
     TextView mLocationTextView;
     @BindView(R.id.listView)
     ListView mListView;
-    private String[] parlor = new String[]{"London", "Storm",
-            "Atlas", "Artemus", "pampurr", "Scrodinger",
-            "Powder", "Zelda", "sisto", "Andy and leah",
-            "Abel", "Frazzle", "Sabrina",
-            "cyborg", "Chip", "Modecai", "Elsa", "Milo", "Nova", "Quarry", "Jasmine", "Bella",
-            "Furry", "Dunkin", "Sync", "Izzy", "Tulsa"};
-    private String[] services = new String[]{"Abyssinian", "American Bobtail", "American curl",
-            "American Shorthair", "American Wirehair", "Applehead Siamese"
-            , "Balinese", "Bengal", "Birman", "Bombay", "British Shorthair",
-            "Burmese", "Burmilla", "Calico", "Canadian Hairless", "Chartreux", "Chausie", "Chinchilla", "Cymric", "Devon Rex",
-            "Dilute Calico", "Domestic Long Hair", "Domestic Medium Hair", "Egyptian Mau", "Exotic Shorthair", "Havana", "Himalayan"};
+    private String[] parlor = new String[]{"Elspa beauty parlor",
+            "Dida beauty parlor", "Sunsession beauty", " Amadivar beauty parlor", " StylePro point",
+            "Superior point", "Brows salon", "farouk beauty", "New look",
+            "Modern hair salon", "Belle beauty", "Yeshi parlor",
+            "Beauty Hub", "Beauty solution", "Ladies bolsos", "Halda naturals", "Lock avenue", "Beauty point", "Jasmine beauty point", "Bella beauty parlor",
+            "Maya salon kenya", "City girl place", "Bruno beauty point", "Emmah beauty parlor", "Natuaral beauty parlor"};
+    private String[] services = new String[]{"Twists", "Short Wavy Bob", "Box braid hairstyles",
+            "Cornrows braids", "Manicure and pedicure", "Soft dreadlocks"
+            , " Facial make up", "Mohawk hair style", "french braid", "ponytail", "curly",
+            "Natural hairstyle", "Box braid", "Dutch braid", "Crotchet braids", "Lemonade braids", "Fishtail braid", "Feed-in braid", "Godness braid", "Braided buns",
+            "Triabal braids", "Fulani braids", "Waterfall braids", "Yarn braids", "Crown braids"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

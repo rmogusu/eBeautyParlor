@@ -27,7 +27,7 @@ public class ParlorActivityInstrumentationTest {
     @Test
     public void listItemClickDisplaysToastWithCorrectParlor() {
         View activityDecorView = activityTestRule.getActivity().getWindow().getDecorView();
-        String petName = "London";
+        String petName = "Elspa beauty parlor";
         onData(anything())
                 .inAdapterView(withId(R.id.listView))
                 .atPosition(0)
