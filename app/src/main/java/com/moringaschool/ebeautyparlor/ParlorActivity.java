@@ -50,4 +50,9 @@ public class ParlorActivity extends AppCompatActivity {
         mLocationTextView.setText("Available parlor for you : " + location);
         Log.d(TAG, "In the onCreate method!");
     }
-}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_restaurants);
+
+    }
