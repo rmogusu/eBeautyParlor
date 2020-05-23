@@ -14,5 +14,13 @@
         android:textSize="15sp"
         android:fontFamily="@font/amarante"
         android:layout_centerHorizontal="true"/>
-
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/locationTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:fontFamily="@font/amarante"
+        android:textSize="15sp" />
 </RelativeLayout>
