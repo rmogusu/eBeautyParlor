@@ -16,9 +16,9 @@ public class MainActivityInstrumentationTest {
     public ActivityTestRule<MainActivity> activityTestRule =
             new ActivityTestRule<>(MainActivity.class);
 
-//    @Test
-//    public void validateEditText() {
-//        onView(withId(R.id.locationEditText)).perform(typeText("Nairobi"))
-//                .check(matches(withText("Nairobi")));
-//    }
+    @Test
+    public void validateEditText() {
+        onView(withId(R.id.locationEditText)).perform(typeText("Nairobi"))
+                .check(matches(withText("Nairobi")));
+    }
 }
