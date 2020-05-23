@@ -23,10 +23,9 @@ public class MainActivityTest {
         TextView appNameTextView = activity.findViewById(R.id.appNameTextView);
         assertTrue("eBeautyParlor".equals(appNameTextView.getText().toString()));
     }
-    @Test
-    public void validateTextViewContent(){
-        TextView appNameTextView = activity.findViewById(R.id.appNameTextView);
-        assertTrue("MyRestaurants".equals(appNameTextView.getText().toString()));
+    @Before
+    public void setup(){
+        activity = Robolectric.setupActivity(MainActivity.class);
     }
     @Test
     public void secondActivityStarted(){
