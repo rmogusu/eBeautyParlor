@@ -23,14 +23,7 @@ public class MainActivityTest {
         TextView appNameTextView = activity.findViewById(R.id.appNameTextView);
         assertTrue("eBeautyParlor".equals(appNameTextView.getText().toString()));
     }
-    @Test
-    public void secondActivityStarted(){
-        activity.findViewById(R.id.findRestaurantsButton).performClick();
-        Intent expectedIntent = new Intent(activity, RestaurantsActivity.class);
-        ShadowActivity shadowActivity = org.robolectric.Shadows.shadowOf(activity);
-        Intent actualIntent = shadowActivity.getNextStartedActivity();
-        assertTrue(actualIntent.filterEquals(expectedIntent));
-    }
+
     @Test
     public void secondActivityStarted(){
         activity.findViewById(R.id.findParlorButton).performClick();
