@@ -35,13 +35,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show();
         }
     }
-    @Override
     public void onClick(View v) {
         String location = mLocationEditText.getText().toString();
-        Log.d(TAG, location);
         Intent intent = new Intent(MainActivity.this, RestaurantsActivity.class);
+        intent.putExtra("location", location);
         startActivity(intent);
     }
 });
-        }
 }
