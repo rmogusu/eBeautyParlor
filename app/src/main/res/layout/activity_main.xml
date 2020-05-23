@@ -5,6 +5,12 @@
     android:layout_height="match_parent"
     tools:context="com.moringaschool.ebeautyparlor.MainActivity"
     android:background="#000000">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView"
+        android:src="@drawable/background"
+        android:scaleType="centerCrop" />
     <TextView
         android:id="@+id/appNameTextView"
         android:layout_width="wrap_content"
@@ -14,7 +20,7 @@
         android:layout_marginTop="35dp"
         android:fontFamily="@font/amarante"
         android:text="eBeautyParlor"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="40sp"
         android:textStyle="bold" />
     <Button
@@ -25,6 +31,6 @@
         android:id="@+id/findParlorButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/colorTextIcons" />
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimaryText" />
 </RelativeLayout>
