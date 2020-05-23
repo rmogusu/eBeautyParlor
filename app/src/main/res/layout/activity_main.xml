@@ -17,4 +17,14 @@
         android:textColor="@color/colorPrimary"
         android:textSize="40sp"
         android:textStyle="bold" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Find eBeautyParlor"
+        android:fontFamily="@font/amarante"
+        android:id="@+id/findParlorButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorTextIcons" />
 </RelativeLayout>
