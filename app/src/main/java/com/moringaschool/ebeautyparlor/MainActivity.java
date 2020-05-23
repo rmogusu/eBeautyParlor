@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFindParlorButton.setOnClickListener(this);
 
     }
+    mLocationEditText = (EditText) findViewById(R.id.locationEditText);
+    mFindRestaurantsButton = (Button) findViewById(R.id.findRestaurantsButton);
+    mAppNameTextView = (TextView) findViewById(R.id.appNameTextView);
     @Override
     public void onClick(View v) {
         if (v == mFindParlorButton) {
