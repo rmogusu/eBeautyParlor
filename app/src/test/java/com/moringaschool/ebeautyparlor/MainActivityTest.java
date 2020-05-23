@@ -24,6 +24,11 @@ public class MainActivityTest {
         assertTrue("eBeautyParlor".equals(appNameTextView.getText().toString()));
     }
     @Test
+    public void validateTextViewContent(){
+        TextView appNameTextView = activity.findViewById(R.id.appNameTextView);
+        assertTrue("MyRestaurants".equals(appNameTextView.getText().toString()));
+    }
+    @Test
     public void secondActivityStarted(){
         activity.findViewById(R.id.findParlorButton).performClick();
         Intent expectedIntent = new Intent(activity, ParlorActivity.class);
