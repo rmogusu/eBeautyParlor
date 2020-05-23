@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    @BindView(R.id.findParlorsButton) Button mFindParlorButton;
+    @BindView(R.id.findParlorButton) Button mFindParlorButton;
     @BindView(R.id.locationEditText) EditText mLocationEditText;
     @BindView(R.id.appNameTextView) TextView mAppNameTextView;
     @Override
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View v) {
-        if (v == mFindParlorsButton) {
+        if (v == mFindParlorButton) {
             String location = mLocationEditText.getText().toString();
             Intent intent = new Intent(MainActivity.this, ParlorActivity.class);
             intent.putExtra("location", location);
@@ -35,4 +35,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show();
         }
     }
+    @Override
+    public void onClick(View v) {
+        String location = mLocationEditText.getText().toString();
+        Log.d(TAG, location);
+        Intent intent = new Intent(MainActivity.this, RestaurantsActivity.class);
+        startActivity(intent);
+    }
+});
+        }
 }
