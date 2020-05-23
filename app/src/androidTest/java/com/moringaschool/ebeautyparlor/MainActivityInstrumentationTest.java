@@ -37,10 +37,13 @@ public class MainActivityInstrumentationTest {
         onView(withId(R.id.locationTextView)).check(matches
                 (withText("Here are all the beauty parlor  near: " + location)));
     }
-
     @Test
-    public void validateEditText() {
-        onView(withId(R.id.locationEditText)).perform(typeText("Nairobi"))
-                .check(matches(withText("Nairobi")));
+    public void locationIsSentToRestaurantsActivity() {
+        String location = "Nairobi";
+        onView(withId(R.id.locationEditText)).perform(typeText(location));
+        onView(withId(R.id.findRestaurantsButton)).perform(click());
+        onView(withId(R.id.locationTextView)).check(matches
+                (withText("Here are all the restaurants near: " + location)));
     }
+
 }
