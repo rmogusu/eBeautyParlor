@@ -26,7 +26,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Find eBeautyParlor"
+        android:text="Find Beauty Parlor"
         android:fontFamily="@font/amarante"
         android:id="@+id/findParlorButton"
         android:layout_alignParentBottom="true"
