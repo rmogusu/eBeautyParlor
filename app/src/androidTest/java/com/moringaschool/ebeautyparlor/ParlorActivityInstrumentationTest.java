@@ -27,12 +27,12 @@ public class ParlorActivityInstrumentationTest {
     @Test
     public void listItemClickDisplaysToastWithCorrectParlor() {
         View activityDecorView = activityTestRule.getActivity().getWindow().getDecorView();
-        String petName = "Elspa beauty parlor";
+        String parlorName = "Elspa beauty parlor";
         onData(anything())
                 .inAdapterView(withId(R.id.listView))
                 .atPosition(0)
                 .perform(click());
-        onView(withText(petName)).inRoot(withDecorView(not(activityDecorView)))
-                .check(matches(withText(petName)));
+        onView(withText(parlorName)).inRoot(withDecorView(not(activityDecorView)))
+                .check(matches(withText(parlorName)));
     }
 }

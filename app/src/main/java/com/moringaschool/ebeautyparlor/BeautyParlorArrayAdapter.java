@@ -17,4 +17,16 @@ public class BeautyParlorArrayAdapter extends ArrayAdapter {
         this.mServices  = mServices;
 
     }
+    @Override
+    public Object getItem(int position) {
+        String parlor= mParlor[position];
+        String service = mServices[position];
+        return String.format("%s \n serves great: %s", parlor , service);
+    }
+
+    @Override
+    public int getCount() {
+        return mParlor.length;
+    }
 }
+
