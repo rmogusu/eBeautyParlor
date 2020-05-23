@@ -16,8 +16,10 @@ import butterknife.ButterKnife;
 
 public class ParlorActivity extends AppCompatActivity {
     public static final String TAG = ParlorActivity.class.getSimpleName();
-    @BindView(R.id.locationTextView) TextView mLocationTextView;
-    @BindView(R.id.listView) ListView mListView;
+    @BindView(R.id.locationTextView)
+    TextView mLocationTextView;
+    @BindView(R.id.listView)
+    ListView mListView;
     private String[] parlor = new String[]{"London", "Storm",
             "Atlas", "Artemus", "pampurr", "Scrodinger",
             "Powder", "Zelda", "sisto", "Andy and leah",
@@ -50,9 +52,4 @@ public class ParlorActivity extends AppCompatActivity {
         mLocationTextView.setText("Available parlor for you : " + location);
         Log.d(TAG, "In the onCreate method!");
     }
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurants);
-
-    }
+}
