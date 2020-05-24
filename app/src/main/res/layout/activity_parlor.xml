@@ -8,11 +8,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" eBeauty parlor near "
+        android:text="Beauty parlor near "
         android:id="@+id/locationTextView"
         android:layout_marginTop="35dp"
         android:textSize="15sp"
-        android:fontFamily="@font/amarante"
+        android:fontFamily="@font/ribeye_marrow"
         android:layout_centerHorizontal="true"/>
     <ListView
         android:id="@+id/listView"
@@ -21,6 +21,5 @@
         android:layout_below="@+id/locationTextView"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:fontFamily="@font/amarante"
-        android:textSize="15sp" />
+        android:textSize="15sp"/>
 </RelativeLayout>

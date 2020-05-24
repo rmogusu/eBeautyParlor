@@ -16,12 +16,9 @@ import butterknife.ButterKnife;
 
 public class ParlorActivity extends AppCompatActivity {
     public static final String TAG = ParlorActivity.class.getSimpleName();
-    @BindView(R.id.locationTextView)
-    TextView mLocationTextView;
-    @BindView(R.id.listView)
-    ListView mListView;
-    private String[] parlor = new String[]{"Elspa beauty parlor",
-            "Dida beauty parlor", "Sunsession beauty", " Amadivar beauty parlor", " StylePro point",
+    @BindView(R.id.locationTextView) TextView mLocationTextView;
+    @BindView(R.id.listView) ListView mListView;
+    private String[] parlor = new String[]{"Beauty point", "Dida beauty parlor", "Sunsession beauty", " Amadivar beauty parlor", " StylePro point",
             "Superior point", "Brows salon", "farouk beauty", "New look",
             "Modern hair salon", "Belle beauty", "Yeshi parlor",
             "Beauty Hub", "Beauty solution", "Ladies bolsos", "Halda naturals", "Lock avenue", "Beauty point", "Jasmine beauty point", "Bella beauty parlor",
@@ -49,7 +46,7 @@ public class ParlorActivity extends AppCompatActivity {
         });
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
-        mLocationTextView.setText("Available parlor for you : " + location);
+        mLocationTextView.setText("Here are all the beauty parlor near: " + location);
         Log.d(TAG, "In the onCreate method!");
     }
 }

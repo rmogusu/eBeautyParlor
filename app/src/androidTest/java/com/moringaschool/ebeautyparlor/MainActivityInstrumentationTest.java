@@ -21,25 +21,23 @@ public class MainActivityInstrumentationTest {
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule =
             new ActivityTestRule<>(MainActivity.class);
-
     @Test
     public void validateEditText() {
-        onView(withId(R.id.locationEditText)).perform(typeText("Nairobi"))
-                .check(matches(withText("Nairobi")));
+        onView(withId(R.id.locationEditText)).perform(typeText("Portland"))
+                .check(matches(withText("Portland")));
     }
-
     @Test
-    public void locationIsSentToParlorActivity() {
-        String location = "Nairobi";
+    public void locationIsSentToRestaurantsActivity(){
+        String location = "Portland";
         onView(withId(R.id.locationEditText)).perform(typeText(location)).perform(closeSoftKeyboard());
-        try {
+        try {                             // the sleep method requires to be checked and handled so we use try block
             Thread.sleep(250);
-        } catch (InterruptedException e) {
+        } catch (InterruptedException e){
             System.out.println("got interrupted!");
         }
         onView(withId(R.id.findParlorButton)).perform(click());
         onView(withId(R.id.locationTextView)).check(matches
-                (withText("Here are all the beauty parlor  near: " + location)));
+                (withText("Here are all the beauty parlor near: " + location)));
     }
 
 }

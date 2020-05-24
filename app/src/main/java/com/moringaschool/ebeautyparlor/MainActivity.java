@@ -36,4 +36,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show();
         }
     }
+
 }
