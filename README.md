@@ -31,9 +31,9 @@ Rose Mogusu.
 
 
 ## BDD(Behaviour Driven Development)
-* By defaut main activity runs where you will enter your location.
+* By default main activity runs where you will enter your location.
 * click button find eBeautyParlor .
-* Scroll through to get eBeautyParlor of your choice then click it u will recieve a toast of the name of beautyParlor with the service offered.
+* Scroll through to get eBeautyParlor of your choice then click it u will receive a toast of the name of beautyParlor with the service offered.
 
 
 
