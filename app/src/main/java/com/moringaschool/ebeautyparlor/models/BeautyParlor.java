@@ -1,4 +1,4 @@
-package com.moringaschool.ebeautyparlor;
+package com.moringaschool.ebeautyparlor.models;
 
 import java.util.ArrayList;
 

@@ -3,6 +3,9 @@ package com.moringaschool.ebeautyparlor;
 import android.content.Intent;
 import android.widget.TextView;
 
+import com.moringaschool.ebeautyparlor.ui.MainActivity;
+import com.moringaschool.ebeautyparlor.ui.ParlorActivity;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

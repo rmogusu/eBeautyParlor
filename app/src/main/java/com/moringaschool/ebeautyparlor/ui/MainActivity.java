@@ -1,4 +1,4 @@
-package com.moringaschool.ebeautyparlor;
+package com.moringaschool.ebeautyparlor.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.moringaschool.ebeautyparlor.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

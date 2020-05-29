@@ -1,4 +1,6 @@
-package com.moringaschool.ebeautyparlor;
+package com.moringaschool.ebeautyparlor.service;
+
+import com.moringaschool.ebeautyparlor.Constants;
 
 import okhttp3.Call;
 import okhttp3.Callback;

@@ -1,4 +1,4 @@
-package com.moringaschool.ebeautyparlor;
+package com.moringaschool.ebeautyparlor.adapters;
 
 import android.content.Context;
 
