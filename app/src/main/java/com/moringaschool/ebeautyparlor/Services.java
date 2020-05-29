@@ -18,6 +18,8 @@ public class Services {
                 .url(url)
                 .header("Authorization", Constants.API_KEY)
                 .build();
+        Call call = client.newCall(request);
+        call.enqueue(callback);
 
     }
 }
