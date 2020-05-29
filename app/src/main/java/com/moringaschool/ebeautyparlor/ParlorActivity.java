@@ -2,7 +2,6 @@ package com.moringaschool.ebeautyparlor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,14 +10,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.IOException;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 public class ParlorActivity extends AppCompatActivity {
     public static final String TAG = ParlorActivity.class.getSimpleName();
@@ -26,6 +19,9 @@ public class ParlorActivity extends AppCompatActivity {
     TextView mLocationTextView;
     @BindView(R.id.listView)
     ListView mListView;
+
+
+
     private String[] parlor = new String[]{"Beauty point", "Dida beauty parlor", "Sunsession beauty", " Amadivar beauty parlor", " StylePro point",
             "Superior point", "Brows salon", "farouk beauty", "New look",
             "Modern hair salon", "Belle beauty", "Yeshi parlor",
@@ -42,6 +38,7 @@ public class ParlorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parlor);
         ButterKnife.bind(this);
+
         BeautyParlorArrayAdapter adapter = new BeautyParlorArrayAdapter(this, android.R.layout.simple_list_item_1, parlor, services);
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -51,6 +48,7 @@ public class ParlorActivity extends AppCompatActivity {
                 Log.v(TAG, "In the onItemClickListener!");
                 Toast.makeText(ParlorActivity.this, pet, Toast.LENGTH_LONG).show();
             }
+
         });
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
@@ -59,25 +57,4 @@ public class ParlorActivity extends AppCompatActivity {
 
     }
 
-
-    private void getBeautyParlor(String location) {
-        final Services service = new Services();
-        service.findBeautyParlor(location, new Callback() {
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                try {
-                    String jsonData = response.body().string();
-                    Log.v(TAG, jsonData);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 }
