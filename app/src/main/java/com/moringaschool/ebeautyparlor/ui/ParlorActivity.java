@@ -16,11 +16,16 @@ import android.widget.Toast;
 import com.moringaschool.ebeautyparlor.BeautyParlorArrayAdapter;
 import com.moringaschool.ebeautyparlor.R;
 import com.moringaschool.ebeautyparlor.adapters.ParlorListAdapter;
+import com.moringaschool.ebeautyparlor.services.SalonService;
 
+import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class ParlorActivity extends AppCompatActivity {
     public static final String TAG = ParlorActivity.class.getSimpleName();
@@ -47,8 +52,8 @@ public class ParlorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parlor);
         ButterKnife.bind(this);
-
-
+        Intent intent = getIntent();
+        String location = intent.getStringExtra("location");
         BeautyParlorArrayAdapter adapter = new BeautyParlorArrayAdapter(this, android.R.layout.simple_list_item_1, parlor, services);
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -60,10 +65,27 @@ public class ParlorActivity extends AppCompatActivity {
             }
 
         });
-        Intent intent = getIntent();
-        String location = intent.getStringExtra("location");
         mLocationTextView.setText("Here are all the beauty parlor near: " + location);
-        Log.d(TAG, "In the onCreate method!");
+        getBeautyParlor(location);
+    }
+    private void getBeautyParlor(String location){
+        final SalonService salonService = new SalonService();
+        salonService.findBeautyParlor(location, new Callback(){
 
+            @Override
+            public void onFailure(Call call, IOException e){
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try{
+                    String jsonData = response.body().string();
+                    Log.v(TAG, jsonData);
+                } catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        }) ;
     }
 }
