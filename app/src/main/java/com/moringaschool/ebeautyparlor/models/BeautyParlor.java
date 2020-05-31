@@ -8,24 +8,23 @@ public class BeautyParlor {
     private String mWebsite;
     private double mRating;
     private String mImageUrl;
-    private String mZipcode;
-    private String mEmail;
     private ArrayList<String> mAddress = new ArrayList<>();
-
-    private ArrayList<String> mCategory = new ArrayList<>();
+    private double mLatitude;
+    private double mLongitude;
+    private ArrayList<String> mCategories = new ArrayList<>();
 
     public BeautyParlor(String name, String phone, String website,
                       double rating, String imageUrl, ArrayList<String> address,
-                       ArrayList<String> category,String email,String zipcode) {
+                      double latitude, double longitude, ArrayList<String> categories) {
         this.mName = name;
         this.mPhone = phone;
         this.mWebsite = website;
         this.mRating = rating;
         this.mImageUrl = imageUrl;
         this.mAddress = address;
-        this.mCategory  = category;
-        this.mEmail =email;
-        this.mZipcode =zipcode;
+        this.mLatitude = latitude;
+        this.mLongitude = longitude;
+        this.mCategories = categories;
     }
 
     public String getName() {
@@ -37,29 +36,30 @@ public class BeautyParlor {
     }
 
     public String getWebsite() {
-        return  mWebsite;
+        return mWebsite;
     }
 
     public double getRating() {
         return mRating;
     }
 
-    public String getImageUrl(){
+    public String getImageUrl() {
         return mImageUrl;
     }
 
     public ArrayList<String> getAddress() {
         return mAddress;
     }
-    public ArrayList<String> getService () {
-        return mCategory;
-    }
-    public String getZipcode() {
-        return mZipcode;
+
+    public double getLatitude() {
+        return mLatitude;
     }
 
-    public String getEmail() {
-        return mEmail;
+    public double getLongitude() {
+        return mLongitude;
+    }
+
+    public ArrayList<String> getCategories() {
+        return mCategories;
     }
 }
-
