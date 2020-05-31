@@ -8,20 +8,24 @@ public class BeautyParlor {
     private String mWebsite;
     private double mRating;
     private String mImageUrl;
+    private String mZipcode;
+    private String mEmail;
     private ArrayList<String> mAddress = new ArrayList<>();
 
-    private ArrayList<String> mService = new ArrayList<>();
+    private ArrayList<String> mCategory = new ArrayList<>();
 
     public BeautyParlor(String name, String phone, String website,
                       double rating, String imageUrl, ArrayList<String> address,
-                       ArrayList<String> service) {
+                       ArrayList<String> category,String email,String zipcode) {
         this.mName = name;
         this.mPhone = phone;
         this.mWebsite = website;
         this.mRating = rating;
         this.mImageUrl = imageUrl;
         this.mAddress = address;
-        this.mService  = service ;
+        this.mCategory  = category;
+        this.mEmail =email;
+        this.mZipcode =zipcode;
     }
 
     public String getName() {
@@ -47,11 +51,15 @@ public class BeautyParlor {
     public ArrayList<String> getAddress() {
         return mAddress;
     }
-
-
-
     public ArrayList<String> getService () {
-        return mService;
+        return mCategory;
+    }
+    public String getZipcode() {
+        return mZipcode;
+    }
+
+    public String getEmail() {
+        return mEmail;
     }
 }
 

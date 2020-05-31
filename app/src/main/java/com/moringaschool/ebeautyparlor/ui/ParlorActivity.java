@@ -1,6 +1,8 @@
 package com.moringaschool.ebeautyparlor.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +15,9 @@ import android.widget.Toast;
 
 import com.moringaschool.ebeautyparlor.BeautyParlorArrayAdapter;
 import com.moringaschool.ebeautyparlor.R;
+import com.moringaschool.ebeautyparlor.adapters.ParlorListAdapter;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,14 +48,15 @@ public class ParlorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_parlor);
         ButterKnife.bind(this);
 
+
         BeautyParlorArrayAdapter adapter = new BeautyParlorArrayAdapter(this, android.R.layout.simple_list_item_1, parlor, services);
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String pet = ((TextView) view).getText().toString();
+                String parlor = ((TextView) view).getText().toString();
                 Log.v(TAG, "In the onItemClickListener!");
-                Toast.makeText(ParlorActivity.this, pet, Toast.LENGTH_LONG).show();
+                Toast.makeText(ParlorActivity.this, parlor, Toast.LENGTH_LONG).show();
             }
 
         });
@@ -60,5 +66,4 @@ public class ParlorActivity extends AppCompatActivity {
         Log.d(TAG, "In the onCreate method!");
 
     }
-
 }
