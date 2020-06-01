@@ -1,9 +1,7 @@
 package com.moringaschool.ebeautyparlor.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.app.Activity;
+import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,43 +9,44 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringaschool.ebeautyparlor.BeautyParlorArrayAdapter;
 import com.moringaschool.ebeautyparlor.R;
 import com.moringaschool.ebeautyparlor.adapters.ParlorListAdapter;
 import com.moringaschool.ebeautyparlor.models.BeautyParlor;
-import com.moringaschool.ebeautyparlor.services.SalonService;
+import com.moringaschool.ebeautyparlor.models.Parlor;
+import com.moringaschool.ebeautyparlor.network.SalonApi;
+import com.moringaschool.ebeautyparlor.network.SalonClient;
 
-import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+
 
 public class ParlorActivity extends AppCompatActivity {
     public static final String TAG = ParlorActivity.class.getSimpleName();
-    @BindView(R.id.locationTextView)
-    TextView mLocationTextView;
-    @BindView(R.id.listView)
-    ListView mListView;
-    public ArrayList<BeautyParlor> mBeautyparlors = new ArrayList<>();
+    //@BindView(R.id.locationTextView) TextView mLocationTextView;
+    //@BindView(R.id.listView) ListView mListView;
+    @BindView(R.id.errorTextView) TextView mErrorTextView;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
+    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
 
-//    private String[] parlor = new String[]{"Beauty point", "Dida beauty parlor", "Sunsession beauty", " Amadivar beauty parlor", " StylePro point",
-//            "Superior point", "Brows salon", "farouk beauty", "New look",
-//            "Modern hair salon", "Belle beauty", "Yeshi parlor",
-//            "Beauty Hub", "Beauty solution", "Ladies bolsos", "Halda naturals", "Lock avenue", "Beauty point", "Jasmine beauty point", "Bella beauty parlor",
-//            "Maya salon kenya", "City girl place", "Bruno beauty point", "Emmah beauty parlor", "Natuaral beauty parlor"};
-//    private String[] services = new String[]{"Twists", "Short Wavy Bob", "Box braid hairstyles",
-//            "Cornrows braids", "Manicure and pedicure", "Soft dreadlocks"
-//            , " Facial make up", "Mohawk hair style", "french braid", "ponytail", "curly",
-//            "Natural hairstyle", "Box braid", "Dutch braid", "Crotchet braids", "Lemonade braids", "Fishtail braid", "Feed-in braid", "Godness braid", "Braided buns",
-//            "Triabal braids", "Fulani braids", "Waterfall braids", "Yarn braids", "Crown braids"};
+    private ParlorListAdapter mAdapter;
+
+    public List<BeautyParlor> parlors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,44 +55,96 @@ public class ParlorActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
-        mLocationTextView.setText("Here are all the beauty parlor near: " + location);
-        getBeautyParlor(location) ;
+//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                String parlor = ((TextView) view).getText().toString();
+//                Toast.makeText(ParlorActivity.this, parlor, Toast.LENGTH_LONG).show();
+//            }
+//        });
+//        Intent intent = getIntent();
+//        String location = intent.getStringExtra("location");
+        //mLocationTextView.setText("Here are all the Beauty Parlor near: " + location);
 
-    }
-
-    private void getBeautyParlor(String location){
-        final SalonService salonService = new SalonService();
-        salonService.findBeautyParlor(location, new Callback(){
-
+        SalonApi client = SalonClient.getClient();
+        Call<List<BeautyParlor>> call = client.getBeautyParlor(location, "parlors");
+        call.enqueue(new Callback<List<BeautyParlor>>() {
             @Override
-            public void onFailure(Call call, IOException e){
-                e.printStackTrace();
+            public void onResponse(Call<List<BeautyParlor>> call, Response<List<BeautyParlor>> response) {
+                hideProgressBar();
+
+                if (response.isSuccessful()) {
+                    //List<BeautyParlor > parlorsList = response.body();
+                    parlors = response .body();
+                    mAdapter = new ParlorListAdapter(ParlorActivity.this,parlors);
+                    mRecyclerView .setAdapter(mAdapter);
+                    RecyclerView.LayoutManager layoutManager =
+                            new LinearLayoutManager(ParlorActivity.this);
+                    mRecyclerView.setLayoutManager(layoutManager);
+                    mRecyclerView.setHasFixedSize(true);
+                    //String[] parlors = new String[parlorsList.size()];
+                    //String[] categories = new String[parlorsList.size()];
+
+                    showParlors();
+                } else {
+                    showUnsuccessfulMessage();
+                }
             }
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                 mBeautyparlors = salonService.processResults(response);
-                ParlorActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        String[] beautyparlorNames = new String[mBeautyparlors.size()];
-                        for(int i = 0; i<beautyparlorNames.length;i++){
-                            beautyparlorNames[i]=mBeautyparlors.get(i).getName();
-                        }
-                        ArrayAdapter adapter = new ArrayAdapter(ParlorActivity.this, android.R.layout.simple_list_item_1, beautyparlorNames);
-                        mListView.setAdapter(adapter);
-                        for (BeautyParlor  beautyParlor : mBeautyparlors) {
-                            Log.d(TAG, "Name: " + beautyParlor.getName());
-                            Log.d(TAG, "Phone: " + beautyParlor.getPhone());
-                            Log.d(TAG, "Website: " + beautyParlor.getWebsite());
-                            Log.d(TAG, "Image url: " + beautyParlor.getImageUrl());
-                            Log.d(TAG, "Rating: " + Double.toString(beautyParlor.getRating()));
-                            Log.d(TAG, "Address: " + android.text.TextUtils.join(", ", beautyParlor.getAddress()));
-                            Log.d(TAG, "Categories: " + beautyParlor.getCategories().toString());
-                        }
-                    }
-                });
+//                    for (int i = 0; i < parlors.length; i++) {
+//                        parlors[i] = parlorsList.get(i).getName();
+//                    }
+//                    ArrayAdapter adapter
+//                            = new BeautyParlorArrayAdapter(ParlorActivity.this, android.R.layout.simple_list_item_1, parlors, categories);
+//                    mListView.setAdapter(adapter);
+//
+//                    showRestaurants();
+//                } else {
+//                    showUnsuccessfulMessage();
+//                }
+//            }
+
+        @Override
+            public void onFailure(Call<List<BeautyParlor>> call, Throwable t) {
+                hideProgressBar();
+                showFailureMessage();
             }
+
         });
     }
 
+//    private void showFailureMessage() {
+//        mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");
+//        mErrorTextView.setVisibility(View.VISIBLE);
+//    }
+//
+//    private void showUnsuccessfulMessage() {
+//        mErrorTextView.setText("Something went wrong. Please try again later");
+//        mErrorTextView.setVisibility(View.VISIBLE);
+//    }
+//
+//    private void showRestaurants() {
+//        mListView.setVisibility(View.VISIBLE);
+//        mLocationTextView.setVisibility(View.VISIBLE);
+//    }
+
+//    private void hideProgressBar() {
+//        mProgressBar.setVisibility(View.GONE);
+//    }
+    private void showFailureMessage() {
+        mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");
+        mErrorTextView.setVisibility(View.VISIBLE);
+    }
+
+    private void showUnsuccessfulMessage() {
+        mErrorTextView.setText("Something went wrong. Please try again later");
+        mErrorTextView.setVisibility(View.VISIBLE);
+    }
+
+    private void showParlors() {
+        mRecyclerView.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        mProgressBar.setVisibility(View.GONE);
+    }
 }

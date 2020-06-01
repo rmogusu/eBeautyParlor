@@ -22,7 +22,6 @@ public class SalonClient {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
                             Request newRequest  = chain.request().newBuilder()
-                                    //.addHeader("Authorization", YELP_API_KEY)
                                     .build();
                             return chain.proceed(newRequest);
                         }
@@ -30,7 +29,7 @@ public class SalonClient {
                     .build();
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl(SALON_BASE_URL)
+                    .baseUrl("https://rose-beautyparlor.herokuapp.com/")
                     .client(okHttpClient)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

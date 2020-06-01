@@ -1,65 +1,150 @@
+
 package com.moringaschool.ebeautyparlor.models;
 
-import java.util.ArrayList;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class BeautyParlor {
-    private String mName;
-    private String mPhone;
-    private String mWebsite;
-    private double mRating;
-    private String mImageUrl;
-    private ArrayList<String> mAddress = new ArrayList<>();
-    private double mLatitude;
-    private double mLongitude;
-    private ArrayList<String> mCategories = new ArrayList<>();
 
-    public BeautyParlor(String name, String phone, String website,
-                      double rating, String imageUrl, ArrayList<String> address,
-                      double latitude, double longitude, ArrayList<String> categories) {
-        this.mName = name;
-        this.mPhone = phone;
-        this.mWebsite = website;
-        this.mRating = rating;
-        this.mImageUrl = imageUrl;
-        this.mAddress = address;
-        this.mLatitude = latitude;
-        this.mLongitude = longitude;
-        this.mCategories = categories;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("phone")
+    @Expose
+    private String phone;
+    @SerializedName("website")
+    @Expose
+    private String website;
+    @SerializedName("rating")
+    @Expose
+    private Double rating;
+    @SerializedName("imageUrl")
+    @Expose
+    private String imageUrl;
+    @SerializedName("address")
+    @Expose
+    private String address;
+    @SerializedName("categories")
+    @Expose
+    private String categories;
+    @SerializedName("latitude")
+    @Expose
+    private String latitude;
+    @SerializedName("longitude")
+    @Expose
+    private String longitude;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+
+    /**
+     * No args constructor for use in serialization
+     * 
+     */
+    public BeautyParlor() {
+    }
+
+    /**
+     * 
+     * @param website
+     * @param address
+     * @param phone
+     * @param imageUrl
+     * @param latitude
+     * @param name
+     * @param rating
+     * @param id
+     * @param longitude
+     */
+    public BeautyParlor(String name, String phone, String website, Double rating, String imageUrl,String categories, String address, String latitude, String longitude, Integer id) {
+        super();
+        this.name = name;
+        this.phone = phone;
+        this.website = website;
+        this.rating = rating;
+        this.imageUrl = imageUrl;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.categories =categories;
+        this.id = id;
     }
 
     public String getName() {
-        return mName;
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPhone() {
-        return mPhone;
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getWebsite() {
-        return mWebsite;
+        return website;
     }
 
-    public double getRating() {
-        return mRating;
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 
     public String getImageUrl() {
-        return mImageUrl;
+        return imageUrl;
     }
 
-    public ArrayList<String> getAddress() {
-        return mAddress;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public double getLatitude() {
-        return mLatitude;
+    public String getAddress() {
+        return address;
     }
 
-    public double getLongitude() {
-        return mLongitude;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public ArrayList<String> getCategories() {
-        return mCategories;
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    public  String getCategories() {
+        return categories;
+    }
+    public void setCategories(String categories) {
+        this.categories= categories;
     }
 }

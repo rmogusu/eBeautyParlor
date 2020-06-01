@@ -2,6 +2,7 @@ package com.moringaschool.ebeautyparlor.services;
 
 import com.moringaschool.ebeautyparlor.Constants;
 import com.moringaschool.ebeautyparlor.models.BeautyParlor;
+import com.moringaschool.ebeautyparlor.models.Parlor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,7 +19,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class SalonService {
-    public static void findBeautyParlor(String location, Callback callback) {
+    public static void findBeautyParlors(String location, Callback callback) {
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .build();
@@ -29,41 +30,32 @@ public class SalonService {
 
         Request request = new Request.Builder()
                 .url(url)
-                //.header("Authorization",Constants.API_KEY)
                 .build();
 
         Call call = client.newCall(request);
         call.enqueue(callback);
-   }
-    public ArrayList<BeautyParlor> processResults(Response response){
-        ArrayList<BeautyParlor> beautyParlors = new ArrayList<>();
-        try{
+    }
+
+    public ArrayList<Parlor> processResults(Response response) {
+        ArrayList<Parlor> parlors = new ArrayList<>();
+        try {
             String jsonData = response.body().string();
             JSONObject salonJSON = new JSONObject(jsonData);
-            JSONArray businessesJSON = salonJSON.getJSONArray("businesses");
-            if (response.isSuccessful()){
-                for (int i = 0; i < businessesJSON.length(); i++){
-                    JSONObject beautyparlorJSON = businessesJSON.getJSONObject(i);
+            JSONArray beautyParlorJSON = salonJSON.getJSONArray("beautyparlor");
+            if (response.isSuccessful()) {
+                for (int i = 0; i < beautyParlorJSON.length(); i++) {
+                    JSONObject beautyparlorJSON = beautyParlorJSON.getJSONObject(i);
                     String name = beautyparlorJSON.getString("name");
-                    String phone = beautyparlorJSON.optString("display_phone", "Phone not available");
-                    String website = beautyparlorJSON.getString("url");
+                    String phone = beautyparlorJSON.optString("phone");
+                    String website = beautyparlorJSON.getString("website");
                     double rating = beautyparlorJSON.getDouble("rating");
-                    String imageUrl = beautyparlorJSON.getString("image_url");
-                    double latitude = beautyparlorJSON.getJSONObject("coordinates").getDouble("latitude");
-                    double longitude = beautyparlorJSON.getJSONObject("coordinates").getDouble("longitude");
-                    ArrayList<String> address = new ArrayList<>();
-                    JSONArray addressJSON = beautyparlorJSON.getJSONObject("location").getJSONArray("display_address");
-                    for (int y = 0; y < addressJSON.length(); y++){
-                        address.add(addressJSON.get(y).toString());
-                    }
-                    ArrayList<String> categories = new ArrayList<>();
-                    JSONArray categoriesJSON = beautyparlorJSON.getJSONArray("categories");
-                    for (int y = 0; y < categoriesJSON.length(); y++){
-                        categories.add(categoriesJSON.getJSONObject(y).getString("title"));
-                    }
-                    BeautyParlor  beautyParlor = new BeautyParlor(name, phone, website, rating,
-                            imageUrl, address, latitude, longitude, categories) ;
-                    beautyParlors.add(beautyParlor);
+                    String imageUrl = beautyparlorJSON.getString("imageUrl");
+                    String categories =beautyparlorJSON .getString("categories") ;
+                    String address =beautyparlorJSON .getString("address") ;
+
+                    Parlor  parlor = new Parlor(name, phone, website, rating,
+                            imageUrl, categories,address);
+                    parlors.add(parlor);
                 }
             }
         } catch (IOException e) {
@@ -71,7 +63,7 @@ public class SalonService {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return beautyParlors;
+        return parlors;
     }
 }
 

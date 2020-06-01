@@ -11,26 +11,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringaschool.ebeautyparlor.R;
 import com.moringaschool.ebeautyparlor.models.BeautyParlor;
-import com.moringaschool.ebeautyparlor.ui.ParlorActivity;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ParlorListAdapter extends RecyclerView.Adapter<ParlorListAdapter.ParlorViewHolder>{
+public class ParlorListAdapter extends RecyclerView.Adapter<ParlorListAdapter.ParlorViewHolder> {
     private Context mContext;
-    private String[] mParlor;
-    private String[] mServices;
+    private List<BeautyParlor> mParlor;
 
-    public ParlorListAdapter(Context mContext, int resource, String[] mParlor, String[] mServices) {
-        this.mContext = mContext;
-        this.mContext = mContext;
-        this.mParlor  = mParlor;
-        this.mServices  = mServices;
-
+    public ParlorListAdapter(Context context, List<BeautyParlor> parlors) {
+        mContext = context;
+        mParlor = parlors;
     }
-
 
     @Override
     public ParlorListAdapter.ParlorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -41,22 +35,23 @@ public class ParlorListAdapter extends RecyclerView.Adapter<ParlorListAdapter.Pa
 
     @Override
     public void onBindViewHolder(ParlorListAdapter.ParlorViewHolder holder, int position) {
-        String parlor= mParlor[position];
-        String service = mServices[position];
-
+        holder.bindParlor(mParlor.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mParlor.length;
+        return mParlor.size();
     }
 
     public class ParlorViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.parlorImageView) ImageView mParlorImageView;
-        @BindView(R.id.parlorNameTextView) TextView mNameTextView;
-        //@BindView(R.id.serTextView) TextView mCategoryTextView;
-        @BindView(R.id.ratingTextView) TextView mRatingTextView;
-
+        @BindView(R.id.parlorImageView)
+        ImageView mParlorImageView;
+        @BindView(R.id.parlorNameTextView)
+        TextView mNameTextView;
+       @BindView(R.id.categoryTextView)
+       TextView mCategoryTextView;
+        @BindView(R.id.ratingTextView)
+        TextView mRatingTextView;
         private Context mContext;
 
         public ParlorViewHolder(View itemView) {
@@ -65,16 +60,10 @@ public class ParlorListAdapter extends RecyclerView.Adapter<ParlorListAdapter.Pa
             mContext = itemView.getContext();
         }
 
-        public void bindParlor(BeautyParlor parlors) {
-//            mNameTextView.setText(restaurant.getName());
-//            mCategoryTextView.setText(restaurant.getCategories().get(0).getTitle());
-//            mRatingTextView.setText("Rating: " + restaurant.getRating() + "/5");
+        public void bindParlor(BeautyParlor  beautyParlor) {
+            mNameTextView.setText(beautyParlor.getName());
+            mCategoryTextView.setText(beautyParlor.getCategories());
+            mRatingTextView.setText("Rating: " +  beautyParlor.getRating() + "/5");
         }
-        //public void bindRestaurant(Business restaurant) {
-//            mNameTextView.setText(restaurant.getName());
-//            mCategoryTextView.setText(restaurant.getCategories().get(0).getTitle());
-//            mRatingTextView.setText("Rating: " + restaurant.getRating() + "/5");
-//        }
-
     }
 }
