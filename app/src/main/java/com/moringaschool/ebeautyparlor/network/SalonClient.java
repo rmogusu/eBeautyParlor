@@ -9,8 +9,6 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.moringaschool.ebeautyparlor.Constants.SALON_BASE_URL;
-
 public class SalonClient {
     private static Retrofit retrofit = null;
 

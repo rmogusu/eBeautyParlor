@@ -1,6 +1,5 @@
 package com.moringaschool.ebeautyparlor.models;
 
-import java.util.ArrayList;
 
 public class Parlor {
     private String mName;
@@ -47,8 +46,6 @@ public class Parlor {
     public  String getAddress() {
         return mAddress;
     }
-
-
 
     public  String getCategories() {
         return mCategories;
