@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringaschool.ebeautyparlor.R;
 import com.moringaschool.ebeautyparlor.models.BeautyParlor;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -61,6 +62,7 @@ public class ParlorListAdapter extends RecyclerView.Adapter<ParlorListAdapter.Pa
         }
 
         public void bindParlor(BeautyParlor  beautyParlor) {
+            Picasso.get().load(beautyParlor.getImageUrl()).into(mParlorImageView);
             mNameTextView.setText(beautyParlor.getName());
             mCategoryTextView.setText(beautyParlor.getCategories());
             mRatingTextView.setText("Rating: " +  beautyParlor.getRating() + "/5");
