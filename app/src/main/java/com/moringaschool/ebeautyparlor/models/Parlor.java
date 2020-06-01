@@ -1,6 +1,8 @@
 package com.moringaschool.ebeautyparlor.models;
 
+import org.parceler.Parcel;
 
+@Parcel
 public class Parlor {
     private String mName;
     private String mPhone;
