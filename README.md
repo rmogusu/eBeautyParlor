@@ -2,7 +2,7 @@
 Rose Mogusu.
 
 ## Description
- This is a eBeautyParlor where you can view all beauty parlor and the services they offer  near your place and make an appointment
+ This is a eBeautyParlor where you can view all beauty parlor near your location with the  and the services they offer  and make an appointment
  with the beauty parlor of your choice.
 
 
@@ -31,9 +31,9 @@ Rose Mogusu.
 
 
 ## BDD(Behaviour Driven Development)
-* By defaut main activity runs where you will enter your location.
-* click button find eBeautyParlor .
-* Scroll through to get eBeautyParlor of your choice then click it u will recieve a toast of the name of beautyParlor with the service offered.
+* By default main activity runs where you will enter your location.
+* click button find eBeautyParlor  of your choice.
+* Scroll through to get eBeautyParlor of your choice then click it to see more details.
 
 
 
