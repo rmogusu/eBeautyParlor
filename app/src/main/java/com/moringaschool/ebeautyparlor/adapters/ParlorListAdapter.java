@@ -1,6 +1,7 @@
 package com.moringaschool.ebeautyparlor.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringaschool.ebeautyparlor.R;
 import com.moringaschool.ebeautyparlor.models.BeautyParlor;
+import com.moringaschool.ebeautyparlor.models.Parlor;
+import com.moringaschool.ebeautyparlor.ui.ParlorDetailActivity;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -44,7 +49,7 @@ public class ParlorListAdapter extends RecyclerView.Adapter<ParlorListAdapter.Pa
         return mParlor.size();
     }
 
-    public class ParlorViewHolder extends RecyclerView.ViewHolder {
+    public class ParlorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.parlorImageView)
         ImageView mParlorImageView;
         @BindView(R.id.parlorNameTextView)
@@ -59,6 +64,7 @@ public class ParlorListAdapter extends RecyclerView.Adapter<ParlorListAdapter.Pa
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            itemView.setOnClickListener(this);
         }
 
         public void bindParlor(BeautyParlor  beautyParlor) {
@@ -66,6 +72,14 @@ public class ParlorListAdapter extends RecyclerView.Adapter<ParlorListAdapter.Pa
             mNameTextView.setText(beautyParlor.getName());
             mCategoryTextView.setText(beautyParlor.getCategories());
             mRatingTextView.setText("Rating: " +  beautyParlor.getRating() + "/5");
+        }
+        @Override
+        public void onClick(View v) {
+            int itemPosition = getLayoutPosition();
+            Intent intent = new Intent(mContext, ParlorDetailActivity.class);
+            intent.putExtra("position", itemPosition);
+            intent.putExtra("parlors", Parcels.wrap(mParlor));
+            mContext.startActivity(intent);
         }
     }
 }

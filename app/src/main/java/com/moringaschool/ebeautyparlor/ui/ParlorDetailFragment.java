@@ -31,7 +31,7 @@ import butterknife.ButterKnife;
  * Use the {@link ParlorDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ParlorDetailFragment extends Fragment implements View.OnClickListener{
+public class ParlorDetailFragment extends Fragment{
 
 
         @BindView(R.id.parlorImageView)
@@ -40,7 +40,7 @@ public class ParlorDetailFragment extends Fragment implements View.OnClickListen
         TextView mNameLabel;
         @BindView(R.id.styleTextView) TextView mCategoriesLabel;
         @BindView(R.id.ratingTextView) TextView mRatingLabel;
-        @BindView(R.id.websiteTextView) TextView mWebsiteLabel;
+        //@BindView(R.id.websiteTextView) TextView mWebsiteLabel;
         @BindView(R.id.phoneTextView) TextView mPhoneLabel;
         @BindView(R.id.addressTextView) TextView mAddressLabel;
         @BindView(R.id.saveParlorButton) TextView mSaveRestaurantButton;
@@ -71,17 +71,13 @@ public class ParlorDetailFragment extends Fragment implements View.OnClickListen
             ButterKnife.bind(this, view);
 
             Picasso.get().load(mParlor.getImageUrl()).into(mImageLabel);
-            List<String> categories = new ArrayList<>();
+            //List<String> categories = new ArrayList<>();
 
-//            for (Category category: mParlor .getCategories()) {
+//            for (Category category: mRestaurant.getCategories()) {
 //                categories.add(category.getTitle());
-//                mWebsiteLabel.setOnClickListener(this);
-//                mPhoneLabel.setOnClickListener(this);
-//                mAddressLabel.setOnClickListener(this);
-//                return view;
 //            }
 
-            mNameLabel.setText(mParlor .getName());
+            mNameLabel.setText(mParlor.getName());
             //mCategoriesLabel.setText(android.text.TextUtils.join(", ", categories));
             mRatingLabel.setText(Double.toString(mParlor.getRating()) + "/5");
             mPhoneLabel.setText(mParlor.getPhone());
@@ -89,24 +85,5 @@ public class ParlorDetailFragment extends Fragment implements View.OnClickListen
 
             return view;
         }
-        @Override
-        public void onClick(View v) {
-//            if (v == mWebsiteLabel) {
-//                Intent webIntent = new Intent(Intent.ACTION_VIEW,
-//                        Uri.parse(mParlor.getUrl()));
-//                startActivity(webIntent);
-//            }
-            if (v == mPhoneLabel) {
-                Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
-                        Uri.parse("tel:" + mParlor.getPhone()));
-                startActivity(phoneIntent);
-            }
-//            if (v == mAddressLabel) {
-//                Intent mapIntent = new Intent(Intent.ACTION_VIEW,
-//                        Uri.parse("geo:" + mParlor .getCoordinates().getLatitude()
-//                                + "," + mRestaurant.getCoordinates().getLongitude()
-//                                + "?q=(" + mRestaurant.getName() + ")"));
-//                startActivity(mapIntent);
-//            }
-        }
-    }
+}
+

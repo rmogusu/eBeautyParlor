@@ -12,7 +12,7 @@ public class Parlor {
     private String mAddress;
 
     private String mCategories;
-
+    public Parlor () {}
     public Parlor(String name, String phone, String website,
                       double rating, String imageUrl,  String address,
                        String  categories) {
