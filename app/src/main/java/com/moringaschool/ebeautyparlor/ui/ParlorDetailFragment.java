@@ -77,14 +77,9 @@ public class ParlorDetailFragment extends Fragment implements View.OnClickListen
         ButterKnife.bind(this, view);
 
         Picasso.get().load(mParlor.getImageUrl()).into(mImageLabel);
-        //List<String> categories = new ArrayList<>();
-
-//            for (Category category: mRestaurant.getCategories()) {
-//                categories.add(category.getTitle());
-//            }
 
         mNameLabel.setText(mParlor.getName());
-        //mCategoriesLabel.setText(android.text.TextUtils.join(", ", categories));
+
         mRatingLabel.setText(Double.toString(mParlor.getRating()) + "/5");
         mPhoneLabel.setText(mParlor.getPhone());
         mAddressLabel.setText(mParlor.getAddress());

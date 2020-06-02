@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.moringaschool.ebeautyparlor.models.BeautyParlor;
-import com.moringaschool.ebeautyparlor.models.Parlor;
+
 import com.moringaschool.ebeautyparlor.ui.ParlorDetailFragment;
 
 import java.util.List;

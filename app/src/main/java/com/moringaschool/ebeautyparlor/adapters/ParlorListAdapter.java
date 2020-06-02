@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringaschool.ebeautyparlor.R;
 import com.moringaschool.ebeautyparlor.models.BeautyParlor;
-import com.moringaschool.ebeautyparlor.models.Parlor;
+
 import com.moringaschool.ebeautyparlor.ui.ParlorDetailActivity;
 import com.squareup.picasso.Picasso;
 
