@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.moringaschool.ebeautyparlor.R;
 import com.moringaschool.ebeautyparlor.models.BeautyParlor;
-import com.moringaschool.ebeautyparlor.models.Parlor;
+
 import com.moringaschool.ebeautyparlor.ui.ParlorDetailActivity;
 import com.squareup.picasso.Picasso;
 
@@ -50,8 +50,7 @@ public class ParlorListAdapter extends RecyclerView.Adapter<ParlorListAdapter.Pa
     }
 
     public class ParlorViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.parlorImageView)
-        ImageView mParlorImageView;
+        @BindView(R.id.parlorImageView) ImageView mParlorImageView;
         @BindView(R.id.parlorNameTextView)
         TextView mNameTextView;
        @BindView(R.id.categoryTextView)

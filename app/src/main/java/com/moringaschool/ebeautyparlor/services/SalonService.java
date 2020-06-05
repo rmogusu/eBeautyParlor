@@ -1,7 +1,7 @@
 package com.moringaschool.ebeautyparlor.services;
 
 import com.moringaschool.ebeautyparlor.Constants;
-import com.moringaschool.ebeautyparlor.models.BeautyParlor;
+
 import com.moringaschool.ebeautyparlor.models.Parlor;
 
 import org.json.JSONArray;
