@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //private SharedPreferences.Editor mEditor;
     private ValueEventListener mSearchedLocationReferenceListener;
     private DatabaseReference mSearchedLocationReference;
+
+    @BindView(R.id.savedParlorsButton) Button mSavedParlorsButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mSearchedLocationReference = FirebaseDatabase
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         //mEditor = mSharedPreferences.edit();
         mFindParlorButton.setOnClickListener(this);
-
+        mSavedParlorsButton.setOnClickListener(this);
     }
 
     @Override
@@ -69,15 +71,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == mFindParlorButton) {
             String location = mLocationEditText.getText().toString();
             saveLocationToFirebase(location);
+            Intent intent = new Intent(MainActivity.this, ParlorActivity.class);
+            //intent.putExtra("location", location);
+            startActivity(intent);
+            Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show();
 //            if(!(location).equals("")) {
 //                addToSharedPreferences(location);
 //            }
-            Intent intent = new Intent(MainActivity.this, ParlorActivity.class);
-            intent.putExtra("location", location);
-            startActivity(intent);
-            Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show();
         }
+            if (v == mSavedParlorsButton) {
+                Intent intent = new Intent(MainActivity.this, SavedParlorListActivity.class);
+                startActivity(intent);
+            }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
