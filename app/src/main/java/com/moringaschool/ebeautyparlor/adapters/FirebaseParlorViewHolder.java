@@ -34,17 +34,17 @@ public class FirebaseParlorViewHolder extends RecyclerView.ViewHolder implements
         mContext = itemView.getContext();
         itemView.setOnClickListener(this);
     }
-    public void bindParlor(BeautyParlor  beautyParlor) {
+    public void bindParlor(Parlor   parlor) {
         ImageView parlorImageView = (ImageView) mView.findViewById(R.id.parlorImageView);
         TextView nameTextView = (TextView) mView.findViewById(R.id.parlorNameTextView);
         TextView categoryTextView = (TextView) mView.findViewById(R.id.categoryTextView);
         TextView ratingTextView = (TextView) mView.findViewById(R.id.ratingTextView);
 
-        Picasso.get().load(beautyParlor.getImageUrl()).into(parlorImageView);
+        Picasso.get().load(parlor.getImageUrl()).into(parlorImageView);
 
-        nameTextView.setText(beautyParlor.getName());
-        categoryTextView.setText(beautyParlor.getCategories());
-        ratingTextView.setText("Rating: " + beautyParlor.getRating() + "/5");
+        nameTextView.setText(parlor.getName());
+        categoryTextView.setText(parlor.getCategories());
+        ratingTextView.setText("Rating: " + parlor.getRating() + "/5");
     }
     @Override
     public void onClick(View view) {
