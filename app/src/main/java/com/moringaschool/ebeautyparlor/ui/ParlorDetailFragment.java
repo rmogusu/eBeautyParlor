@@ -90,7 +90,7 @@ public class ParlorDetailFragment extends Fragment implements View.OnClickListen
         mWebsiteLabel.setOnClickListener(this);
         mPhoneLabel.setOnClickListener(this);
         mAddressLabel.setOnClickListener(this);
-
+        mSaveRestaurantButton.setOnClickListener(this);
         return view;
     }
 

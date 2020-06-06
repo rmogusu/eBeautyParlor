@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.ParlorDetailActivity"></activity>
+        <activity android:name=".ui.SavedParlorListActivity"></activity>
+        <activity android:name=".ui.ParlorDetailActivity" />
         <activity android:name=".ui.ParlorActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
