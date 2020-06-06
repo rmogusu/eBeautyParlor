@@ -3,13 +3,14 @@ package com.moringaschool.ebeautyparlor.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
 import com.moringaschool.ebeautyparlor.R;
 
-public class CreateAccountActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_account);
+        setContentView(R.layout.activity_login);
     }
 }
