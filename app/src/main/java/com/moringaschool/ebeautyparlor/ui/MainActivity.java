@@ -63,11 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFindParlorButton.setOnClickListener(this);
 
     }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mSearchedLocationReference.removeEventListener(mSearchedLocationReferenceListener);
-    }
+
     @Override
     public void onClick(View v) {
         if (v == mFindParlorButton) {
@@ -82,7 +78,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show();
         }
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSearchedLocationReference.removeEventListener(mSearchedLocationReferenceListener);
+    }
     public void saveLocationToFirebase(String location) {
         mSearchedLocationReference.push().setValue(location);
     }
