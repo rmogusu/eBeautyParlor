@@ -28,8 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.findParlorButton) Button mFindParlorButton;
     @BindView(R.id.locationEditText) EditText mLocationEditText;
     @BindView(R.id.appNameTextView) TextView mAppNameTextView;
-    //private SharedPreferences mSharedPreferences;
-    //private SharedPreferences.Editor mEditor;
+
     private ValueEventListener mSearchedLocationReferenceListener;
     private DatabaseReference mSearchedLocationReference;
 
@@ -60,8 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        //mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        //mEditor = mSharedPreferences.edit();
+
         mFindParlorButton.setOnClickListener(this);
         mSavedParlorsButton.setOnClickListener(this);
     }
@@ -75,9 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //intent.putExtra("location", location);
             startActivity(intent);
             Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show();
-//            if(!(location).equals("")) {
-//                addToSharedPreferences(location);
-//            }
+
         }
             if (v == mSavedParlorsButton) {
                 Intent intent = new Intent(MainActivity.this, SavedParlorListActivity.class);
@@ -93,7 +89,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void saveLocationToFirebase(String location) {
         mSearchedLocationReference.push().setValue(location);
     }
-//    private void addToSharedPreferences(String location) {
-//        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
-//    }
+
 }
