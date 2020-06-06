@@ -39,8 +39,11 @@ public class ParlorActivity extends AppCompatActivity {
     @BindView(R.id.errorTextView) TextView mErrorTextView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
-    //private SharedPreferences mSharedPreferences;
-    //private String mRecentAddress;
+
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    private String mRecentAddress;
+
     private ParlorListAdapter mAdapter;
 
     public List<BeautyParlor> parlors;
@@ -87,7 +90,9 @@ public class ParlorActivity extends AppCompatActivity {
 
         });
     }
-
+    private void addToSharedPreferences(String location) {
+        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
+    }
     private void showFailureMessage() {
         mErrorTextView.setText("Something went wrong. Please check your Internet connection and try again later");
         mErrorTextView.setVisibility(View.VISIBLE);
