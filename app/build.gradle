@@ -82,5 +82,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:3.3.1'
     //firebaseRecyclervie
     implementation 'com.firebaseui:firebase-ui-database:3.3.1'
+    //firebase auth
+    implementation 'com.google.firebase:firebase-auth:16.1.0'
 }
 apply plugin: 'com.google.gms.google-services'
