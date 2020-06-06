@@ -39,8 +39,8 @@ public class ParlorActivity extends AppCompatActivity {
     @BindView(R.id.errorTextView) TextView mErrorTextView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
-    private SharedPreferences mSharedPreferences;
-    private String mRecentAddress;
+    //private SharedPreferences mSharedPreferences;
+    //private String mRecentAddress;
     private ParlorListAdapter mAdapter;
 
     public List<BeautyParlor> parlors;
@@ -50,11 +50,11 @@ public class ParlorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parlor);
         ButterKnife.bind(this);
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
-        if (mRecentAddress != null) {
-            //getBeautyParlor(mRecentAddress);
-        }
+        //mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        //mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+//        if (mRecentAddress != null) {
+//            getBeautyParlor(mRecentAddress);
+//        }
 
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
