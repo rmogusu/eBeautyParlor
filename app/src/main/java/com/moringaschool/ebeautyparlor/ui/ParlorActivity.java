@@ -6,12 +6,17 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,9 +41,12 @@ import retrofit2.Response;
 
 public class ParlorActivity extends AppCompatActivity {
     public static final String TAG = ParlorActivity.class.getSimpleName();
-    @BindView(R.id.errorTextView) TextView mErrorTextView;
-    @BindView(R.id.progressBar) ProgressBar mProgressBar;
-    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+    @BindView(R.id.errorTextView)
+    TextView mErrorTextView;
+    @BindView(R.id.progressBar)
+    ProgressBar mProgressBar;
+    @BindView(R.id.recyclerView)
+    RecyclerView mRecyclerView;
 
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
@@ -61,7 +69,17 @@ public class ParlorActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
+
         SalonApi client = SalonClient.getClient();
+        client.getBeautyParlor(mRecentAddress, location);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+
+        if (mRecentAddress != null) {
+            client.getBeautyParlor(mRecentAddress, location);
+        }
+
         Call<List<BeautyParlor>> call = client.getBeautyParlor(location, "mRecentAddress");
         call.enqueue(new Callback<List<BeautyParlor>>() {
             @Override
@@ -69,9 +87,9 @@ public class ParlorActivity extends AppCompatActivity {
                 hideProgressBar();
 
                 if (response.isSuccessful()) {
-                    parlors = response .body();
-                    mAdapter = new ParlorListAdapter(ParlorActivity.this,parlors);
-                    mRecyclerView .setAdapter(mAdapter);
+                    parlors = response.body();
+                    mAdapter = new ParlorListAdapter(ParlorActivity.this, parlors);
+                    mRecyclerView.setAdapter(mAdapter);
                     RecyclerView.LayoutManager layoutManager =
                             new LinearLayoutManager(ParlorActivity.this);
                     mRecyclerView.setLayoutManager(layoutManager);
@@ -82,7 +100,7 @@ public class ParlorActivity extends AppCompatActivity {
                 }
             }
 
-        @Override
+            @Override
             public void onFailure(Call<List<BeautyParlor>> call, Throwable t) {
                 hideProgressBar();
                 showFailureMessage();
@@ -90,6 +108,41 @@ public class ParlorActivity extends AppCompatActivity {
 
         });
     }
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+        ButterKnife.bind(this);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                addToSharedPreferences(query);
+                SalonApi client = SalonClient.getClient();
+                client.getBeautyParlor(mRecentAddress, query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+
+        });
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item){
+        return super.onOptionsItemSelected(item);
+    }
+
     private void addToSharedPreferences(String location) {
         mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
     }
