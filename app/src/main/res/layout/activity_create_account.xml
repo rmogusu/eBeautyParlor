@@ -88,6 +88,7 @@
             android:textColor="@color/colorTextIcons"
             android:textStyle="bold"
             android:textSize="15sp"
+            android:fontFamily="@font/ribeye_marrow"
             android:text="Already have an account? Log in here!"
             android:id="@+id/loginTextView"
             android:layout_gravity="center_horizontal" />
@@ -98,6 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Account"
+        android:fontFamily="@font/ribeye_marrow"
         android:textColor="@color/colorPrimaryLight"
         android:textSize="30dp"
         android:textStyle="bold"
