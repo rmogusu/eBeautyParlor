@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "212928875008",
+    "firebase_url": "https://ebeautyparlor-655f2.firebaseio.com",
+    "project_id": "ebeautyparlor-655f2",
+    "storage_bucket": "ebeautyparlor-655f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212928875008:android:3fab55aba4531863c2a6e5",
+        "android_client_info": {
+          "package_name": "com.moringaschool.ebeautyparlor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "212928875008-autvtqfd2lhkn3ir4nsjuikvmpi05no2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuiY8TDrCu69U3APc3zEidpcw1yba3L9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "212928875008-autvtqfd2lhkn3ir4nsjuikvmpi05no2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
