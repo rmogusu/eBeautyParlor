@@ -2,7 +2,10 @@ package com.moringaschool.ebeautyparlor.ui;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -13,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.moringaschool.ebeautyparlor.Constants;
 import com.moringaschool.ebeautyparlor.R;
 import com.moringaschool.ebeautyparlor.adapters.ParlorListAdapter;
 import com.moringaschool.ebeautyparlor.models.BeautyParlor;;
@@ -35,7 +39,8 @@ public class ParlorActivity extends AppCompatActivity {
     @BindView(R.id.errorTextView) TextView mErrorTextView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
-
+    private SharedPreferences mSharedPreferences;
+    private String mRecentAddress;
     private ParlorListAdapter mAdapter;
 
     public List<BeautyParlor> parlors;
@@ -45,10 +50,16 @@ public class ParlorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parlor);
         ButterKnife.bind(this);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+        if (mRecentAddress != null) {
+            //getBeautyParlor(mRecentAddress);
+        }
+
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
         SalonApi client = SalonClient.getClient();
-        Call<List<BeautyParlor>> call = client.getBeautyParlor(location, "parlors");
+        Call<List<BeautyParlor>> call = client.getBeautyParlor(location, "mRecentAddress");
         call.enqueue(new Callback<List<BeautyParlor>>() {
             @Override
             public void onResponse(Call<List<BeautyParlor>> call, Response<List<BeautyParlor>> response) {

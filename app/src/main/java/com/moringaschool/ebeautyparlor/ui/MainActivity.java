@@ -3,13 +3,16 @@ package com.moringaschool.ebeautyparlor.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.moringaschool.ebeautyparlor.Constants;
 import com.moringaschool.ebeautyparlor.R;
 
 import butterknife.BindView;
@@ -19,11 +22,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.findParlorButton) Button mFindParlorButton;
     @BindView(R.id.locationEditText) EditText mLocationEditText;
     @BindView(R.id.appNameTextView) TextView mAppNameTextView;
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
         mFindParlorButton.setOnClickListener(this);
 
     }
@@ -32,11 +39,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v == mFindParlorButton) {
             String location = mLocationEditText.getText().toString();
+            if(!(location).equals("")) {
+                addToSharedPreferences(location);
+            }
             Intent intent = new Intent(MainActivity.this, ParlorActivity.class);
             intent.putExtra("location", location);
             startActivity(intent);
             Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show();
         }
     }
-
+    private void addToSharedPreferences(String location) {
+        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
+    }
 }
