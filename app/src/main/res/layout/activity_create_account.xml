@@ -26,7 +26,7 @@
             android:layout_marginBottom="10dp"
             android:textColor="@android:color/black"
             android:textColorHint="@color/colorDivider"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
         <EditText
             android:id="@+id/emailEditText"
@@ -40,7 +40,7 @@
             android:layout_marginBottom="10dp"
             android:textColor="@android:color/black"
             android:textColorHint="@color/colorDivider"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
         <EditText
             android:id="@+id/passwordEditText"
@@ -54,7 +54,7 @@
             android:layout_marginBottom="10dp"
             android:textColor="@android:color/black"
             android:textColorHint="@color/colorDivider"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
         <EditText
             android:id="@+id/confirmPasswordEditText"
@@ -68,41 +68,40 @@
             android:layout_marginBottom="10dp"
             android:textColor="@android:color/black"
             android:textColorHint="@color/colorDivider"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
-
-        <Button
-            android:id="@+id/createUserButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Sign up"
-            android:background="@color/colorAccent"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/colorTextIcons" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/colorTextIcons"
-            android:textStyle="bold"
-            android:textSize="15sp"
-            android:fontFamily="@font/ribeye_marrow"
-            android:text="Already have an account? Log in here!"
-            android:id="@+id/loginTextView"
-            android:layout_gravity="center_horizontal" />
-
+               <Button
+                   android:id="@+id/createUserButton"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:padding="10dp"
+                   android:text="Sign up"
+                   android:background="@color/colorAccent"
+                   android:layout_marginTop="15dp"
+                   android:textColor="@color/colorTextIcons"/>
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="20dp"
+                  android:textColor="@color/colorTextIcons"
+                  android:textStyle="bold"
+                  android:textSize="15dp"
+                  android:fontFamily="@font/ribeye_marrow"
+                  android:text="Already have an account? Log in here!"
+                  android:id="@+id/loginTextView"
+                  android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create Account"
-        android:fontFamily="@font/ribeye_marrow"
-        android:textColor="@color/colorPrimaryLight"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:layout_above="@+id/linearLayout"
-        android:layout_centerHorizontal="true" />
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Create Account"
+               android:fontFamily="@font/ribeye_marrow"
+               android:textColor="@color/colorPrimaryLight"
+               android:textSize="30dp"
+               android:textStyle="bold"
+               android:layout_above="@+id/linearLayout"
+               android:layout_centerHorizontal="true"/>
+
 </RelativeLayout>
