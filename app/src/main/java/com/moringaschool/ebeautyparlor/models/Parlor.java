@@ -12,6 +12,7 @@ public class Parlor {
     double rating;
     String imageUrl;
     String categories;
+    private String pushId;
     public Parlor () {}
     public Parlor(String name, String phone, String website,
                       double rating, String imageUrl,  String address,
@@ -51,5 +52,12 @@ public class Parlor {
 
     public  String getCategories() {
         return categories;
+    }
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 }
