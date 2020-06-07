@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.moringaschool.ebeautyparlor.Constants;
@@ -114,10 +116,16 @@ public class ParlorDetailFragment extends Fragment implements View.OnClickListen
             startActivity(mapIntent);
         }
         if (v == mSaveRestaurantButton) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
             DatabaseReference parlorRef = FirebaseDatabase
                     .getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_PARLORS);
-            parlorRef.push().setValue(mParlor);
+                    .getReference(Constants.FIREBASE_CHILD_PARLORS)
+                    .child(uid);
+            DatabaseReference pushRef = parlorRef.push();
+            String pushId = pushRef.getKey();
+            mParlor.setPushId(pushId);
+            pushRef.setValue(mParlor);
             Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
 

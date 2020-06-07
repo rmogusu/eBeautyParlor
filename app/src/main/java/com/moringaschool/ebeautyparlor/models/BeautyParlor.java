@@ -39,6 +39,7 @@ public class BeautyParlor {
     @SerializedName("id")
     @Expose
     Integer id;
+    private String pushId;
 
     /**
      * No args constructor for use in serialization
@@ -149,5 +150,12 @@ public class BeautyParlor {
     }
     public void setCategories(String categories) {
         this.categories= categories;
+    }
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 }
