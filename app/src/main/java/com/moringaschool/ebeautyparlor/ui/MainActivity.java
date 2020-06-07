@@ -53,8 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .getInstance()
                 .getReference()
                 .child(Constants.FIREBASE_CHILD_SEARCHED_LOCATION);
-        mSearchedLocationReference.addValueEventListener(new ValueEventListener() {
-
+        mSearchedLocationReferenceListener = mSearchedLocationReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot locationSnapshot : dataSnapshot.getChildren()) {
@@ -67,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
         });
 
         super.onCreate(savedInstanceState);
@@ -109,16 +109,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
-        if (id == R.id.action_logout) {
+        if(id == R.id.action_logout){
             logout();
             return true;
         }
@@ -133,16 +133,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
         finish();
     }
-
     public void saveLocationToFirebase(String location) {
         mSearchedLocationReference.push().setValue(location);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mSearchedLocationReference.removeEventListener(mSearchedLocationReferenceListener);
-    }
 
     @Override
     public void onStart() {
@@ -156,5 +150,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSearchedLocationReference.removeEventListener(mSearchedLocationReferenceListener);
     }
 }

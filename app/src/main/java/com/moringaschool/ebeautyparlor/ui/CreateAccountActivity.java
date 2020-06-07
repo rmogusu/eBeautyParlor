@@ -86,7 +86,7 @@ public class CreateAccountActivity extends AppCompatActivity  implements View.On
              final String name = mNameEditText.getText().toString().trim();
              final String email = mEmailEditText.getText().toString().trim();
              String password = mPasswordEditText.getText().toString().trim();
-             //mName = mNameEditText.getText().toString().trim();
+             mName = mNameEditText.getText().toString().trim();
              String confirmPassword = mConfirmPasswordEditText.getText().toString().trim();
              boolean validEmail = isValidEmail(email);
              boolean validName = isValidName(name);
