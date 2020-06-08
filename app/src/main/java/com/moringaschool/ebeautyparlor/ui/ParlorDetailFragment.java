@@ -12,7 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.moringaschool.ebeautyparlor.Constants;
 import com.moringaschool.ebeautyparlor.R;
 import com.moringaschool.ebeautyparlor.models.BeautyParlor;
 import com.moringaschool.ebeautyparlor.models.Parlor;
@@ -86,7 +92,7 @@ public class ParlorDetailFragment extends Fragment implements View.OnClickListen
         mWebsiteLabel.setOnClickListener(this);
         mPhoneLabel.setOnClickListener(this);
         mAddressLabel.setOnClickListener(this);
-
+        mSaveRestaurantButton.setOnClickListener(this);
         return view;
     }
 
@@ -108,6 +114,19 @@ public class ParlorDetailFragment extends Fragment implements View.OnClickListen
                             + "," + mParlor.getLongitude()
                             + "?q=(" + mParlor.getName() + ")"));
             startActivity(mapIntent);
+        }
+        if (v == mSaveRestaurantButton) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
+            DatabaseReference parlorRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_PARLORS)
+                    .child(uid);
+            DatabaseReference pushRef = parlorRef.push();
+            String pushId = pushRef.getKey();
+            mParlor.setPushId(pushId);
+            pushRef.setValue(mParlor);
+            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
 
     }

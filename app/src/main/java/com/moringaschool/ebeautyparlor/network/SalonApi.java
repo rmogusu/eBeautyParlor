@@ -11,7 +11,8 @@ import retrofit2.http.Query;
 public interface SalonApi {
     @GET("beautyparlor")
 Call<List<BeautyParlor>> getBeautyParlor(
-        @Query("location") String location,
-        @Query("term") String term);
+            @Query("location") String location
+        //@Query("term") String term);
+    );
 
 }

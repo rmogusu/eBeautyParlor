@@ -11,18 +11,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.ParlorDetailActivity"></activity>
+        <activity
+            android:name=".ui.MainActivity">
+        </activity>
+        <activity android:name=".ui.CreateAccountActivity" />
+        <activity android:name=".ui.SavedParlorListActivity" />
+        <activity android:name=".ui.ParlorDetailActivity" />
         <activity android:name=".ui.ParlorActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.moringaschool.ebeautyparlor.ui.MainActivity" />
         </activity>
-        <activity
-            android:name=".ui.MainActivity"
-            android:theme="@style/NoActionBarTheme">
+        <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

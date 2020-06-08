@@ -4,52 +4,60 @@ import org.parceler.Parcel;
 
 @Parcel
 public class Parlor {
-    private String mName;
-    private String mPhone;
-    private String mWebsite;
-    private double mRating;
-    private String mImageUrl;
-    private String mAddress;
 
-    private String mCategories;
+    String website;
+     String address;
+    String name;
+    String phone;
+    double rating;
+    String imageUrl;
+    String categories;
+    private String pushId;
     public Parlor () {}
     public Parlor(String name, String phone, String website,
                       double rating, String imageUrl,  String address,
                        String  categories) {
-        this.mName = name;
-        this.mPhone = phone;
-        this.mWebsite = website;
-        this.mRating = rating;
-        this.mImageUrl = imageUrl;
-        this.mAddress = address;
-        this.mCategories = categories;
+        this.name = name;
+        this.phone = phone;
+        this.website = website;
+        this.rating = rating;
+        this.address = address;
+        this.imageUrl = imageUrl;
+        this.categories = categories;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public String getPhone() {
-        return mPhone;
+        return phone;
     }
 
     public String getWebsite() {
-        return  mWebsite;
+        return  website;
     }
 
     public double getRating() {
-        return mRating;
+        return rating;
     }
 
     public String getImageUrl(){
-        return mImageUrl;
+        return imageUrl;
     }
 
     public  String getAddress() {
-        return mAddress;
+        return address;
     }
 
     public  String getCategories() {
-        return mCategories;
+        return categories;
+    }
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 }
