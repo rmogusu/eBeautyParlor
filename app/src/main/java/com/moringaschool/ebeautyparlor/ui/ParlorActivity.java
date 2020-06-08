@@ -61,26 +61,20 @@ public class ParlorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parlor);
         ButterKnife.bind(this);
-        //mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        //mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
-//        if (mRecentAddress != null) {
-//            getBeautyParlor(mRecentAddress);
-//        }
 
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
 
         SalonApi client = SalonClient.getClient();
-        client.getBeautyParlor(mRecentAddress, location);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
 
         if (mRecentAddress != null) {
-            client.getBeautyParlor(mRecentAddress, location);
+            //client.getBeautyParlor(mRecentAddress, locatio);
         }
 
-        Call<List<BeautyParlor>> call = client.getBeautyParlor(location, "mRecentAddress");
+        Call<List<BeautyParlor>> call = client.getBeautyParlor( "mRecentAddress");
         call.enqueue(new Callback<List<BeautyParlor>>() {
             @Override
             public void onResponse(Call<List<BeautyParlor>> call, Response<List<BeautyParlor>> response) {
@@ -123,10 +117,37 @@ public class ParlorActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                addToSharedPreferences(query);
+            public boolean onQueryTextSubmit(String location) {
+                addToSharedPreferences(location);
                 SalonApi client = SalonClient.getClient();
-                client.getBeautyParlor(mRecentAddress, query);
+                Call<List<BeautyParlor>> call = client.getBeautyParlor(location);
+
+                call.enqueue(new Callback<List<BeautyParlor>>() {
+                    @Override
+                    public void onResponse(Call<List<BeautyParlor>> call, Response<List<BeautyParlor>> response) {
+                        hideProgressBar();
+
+                        if (response.isSuccessful()) {
+                            parlors = response.body();
+                            mAdapter = new ParlorListAdapter(ParlorActivity.this, parlors);
+                            mRecyclerView.setAdapter(mAdapter);
+                            RecyclerView.LayoutManager layoutManager =
+                                    new LinearLayoutManager(ParlorActivity.this);
+                            mRecyclerView.setLayoutManager(layoutManager);
+                            mRecyclerView.setHasFixedSize(true);
+                            showParlors();
+                        } else {
+                            showUnsuccessfulMessage();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<BeautyParlor>> call, Throwable t) {
+                        hideProgressBar();
+                        showFailureMessage();
+                    }
+
+                });
                 return false;
             }
 

@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.moringaschool.ebeautyparlor.Constants;
@@ -26,8 +28,7 @@ public class SavedParlorListActivity extends AppCompatActivity {
     private DatabaseReference mParlorReference;
     private FirebaseRecyclerAdapter<Parlor, FirebaseParlorViewHolder> mFirebaseAdapter;
 
-    @BindView(R.id.recyclerView)
-    RecyclerView mRecyclerView;
+    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
 
 
     @Override
@@ -35,8 +36,9 @@ public class SavedParlorListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parlor);
         ButterKnife.bind(this);
-
-        mParlorReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PARLORS);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        mParlorReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PARLORS).child(uid);
         setUpFirebaseAdapter();
     }
 
