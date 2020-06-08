@@ -33,7 +33,6 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     @BindView(R.id.findParlorButton)
     Button mFindParlorButton;
-    //@BindView(R.id.locationEditText) EditText mLocationEditText;
     @BindView(R.id.appNameTextView)
     TextView mAppNameTextView;
     @BindView(R.id.savedParlorsButton)
@@ -93,13 +92,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v == mFindParlorButton) {
-            //String location = mLocationEditText.getText().toString();
-            //saveLocationToFirebase(location);
             Intent intent = new Intent(MainActivity.this, ParlorActivity.class);
-            //intent.putExtra("location", location);
             startActivity(intent);
-            //Toast.makeText(MainActivity.this, location, Toast.LENGTH_LONG).show();
-
         }
         if (v == mSavedParlorsButton) {
             Intent intent = new Intent(MainActivity.this, SavedParlorListActivity.class);

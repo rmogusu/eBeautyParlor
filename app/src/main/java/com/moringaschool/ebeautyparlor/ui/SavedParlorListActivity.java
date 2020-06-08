@@ -9,73 +9,74 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListAdapter;
+import android.widget.ProgressBar;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.moringaschool.ebeautyparlor.Constants;
 import com.moringaschool.ebeautyparlor.R;
+
 import com.moringaschool.ebeautyparlor.adapters.FirebaseParlorViewHolder;
+import com.moringaschool.ebeautyparlor.adapters.ParlorListAdapter;
+import com.moringaschool.ebeautyparlor.models.BeautyParlor;
 import com.moringaschool.ebeautyparlor.models.Parlor;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SavedParlorListActivity extends AppCompatActivity {
     private DatabaseReference mParlorReference;
-    private FirebaseRecyclerAdapter<Parlor, FirebaseParlorViewHolder> mFirebaseAdapter;
+    private FirebaseRecyclerAdapter<BeautyParlor , FirebaseParlorViewHolder> mFirebaseAdapter;
 
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
-
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
+    private ParlorListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parlor);
         ButterKnife.bind(this);
+        final ArrayList<BeautyParlor> parlors = new ArrayList<>();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
-        mParlorReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PARLORS).child(uid);
-        setUpFirebaseAdapter();
-    }
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_PARLORS).child(uid);
+        ref.addValueEventListener(new ValueEventListener() {
 
-    private void setUpFirebaseAdapter(){
-        FirebaseRecyclerOptions<Parlor> options =
-                new FirebaseRecyclerOptions.Builder<Parlor>()
-                        .setQuery(mParlorReference, Parlor.class)
-                        .build();
-
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<Parlor, FirebaseParlorViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull FirebaseParlorViewHolder firebaseParlorViewHolder, int position, @NonNull Parlor parlor) {
-                firebaseParlorViewHolder.bindParlor(parlor);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    parlors.add(snapshot.getValue(BeautyParlor.class));
+
+                }
+                mAdapter = new ParlorListAdapter(SavedParlorListActivity.this, parlors);
+                mAdapter = new ParlorListAdapter(getApplicationContext(), parlors);
+                mRecyclerView.setAdapter(mAdapter);
+                RecyclerView.LayoutManager layoutManager =
+                        new LinearLayoutManager(SavedParlorListActivity.this);
+                mRecyclerView.setLayoutManager(layoutManager);
+                mRecyclerView.setHasFixedSize(true);
+
+                showParlors();
             }
-            @NonNull
             @Override
-            public FirebaseParlorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.parlor_list_item, parent, false);
-                return new FirebaseParlorViewHolder(view);
+            public void onCancelled(DatabaseError databaseError) {
             }
-        };
-
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mFirebaseAdapter);
+        });
+    }
+    private void showParlors() {
+        mRecyclerView.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.GONE);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mFirebaseAdapter.startListening();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(mFirebaseAdapter!= null) {
-            mFirebaseAdapter.stopListening();
-        }
-    }
 }
